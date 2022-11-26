@@ -536,7 +536,7 @@ public class SimulationManager : MonoBehaviour {
     
     public void Initialize()
     {
-        redirectionManager.runInTestMode = runInSimulationMode;
+        //redirectionManager.runInTestMode = runInSimulationMode;
         userIsWalking = !(redirectionManager.MOVEMENT_CONTROLLER == RedirectionManager.MovementController.AutoPilot);
         if (redirectionManager.MOVEMENT_CONTROLLER == RedirectionManager.MovementController.AutoPilot)
             DISTANCE_TO_WAYPOINT_THRESHOLD = 0.05f;// 0.0001f;
@@ -853,6 +853,7 @@ public class SimulationManager : MonoBehaviour {
         if (!experimentInProgress && experimentIterator < experimentSetups.Count)
         {
             startNextExperiment();
+            print("StartE");
             //experimentStartTime = Time.time;
         }
         //if (experimentInProgress && !userStartedWalking && ((Time.time - experimentStartTime) / timeScale > WALKING_WAIT_TIME))

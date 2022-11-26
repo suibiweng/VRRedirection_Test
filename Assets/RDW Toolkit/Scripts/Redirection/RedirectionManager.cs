@@ -365,7 +365,7 @@ public class RedirectionManager : MonoBehaviour {
 
     void GetSimulatedHead()
     {
-        simulatedHead = transform.Find("Simulated User").Find("Head");
+        simulatedHead = transform.Find("Head");
     }
 
     void GetTargetWaypoint()
@@ -404,6 +404,7 @@ public class RedirectionManager : MonoBehaviour {
         //print("Is Resetter Null? " + (resetter == null));
         if (resetter != null && resetter.IsResetRequired())
         {
+            print("Turn");
             //print("RESET WAS REQUIRED");
             resetter.InitializeReset();
             inReset = true;

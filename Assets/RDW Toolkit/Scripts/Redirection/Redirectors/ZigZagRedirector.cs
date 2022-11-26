@@ -19,7 +19,7 @@ public class ZigZagRedirector : Redirector
     /// <summary>
     ///  How close you need to get to the waypoint for it to be considered reached.
     /// </summary>
-    float WAYPOINT_UPDATE_DISTANCE = 0.4f;
+    float WAYPOINT_UPDATE_DISTANCE = 0.5f;
     /// <summary>
     /// How slow you need to be walking to trigger next waypoint when in proximity to current target.
     /// </summary>
@@ -119,7 +119,7 @@ public class ZigZagRedirector : Redirector
     }
 
 
-    void updateWaypoint()
+    public void updateWaypoint()
     {
         bool userIsNearTarget = Utilities.FlattenedPos3D(redirectionManager.currPos - waypoints[waypointIndex].position).magnitude < WAYPOINT_UPDATE_DISTANCE;
         bool userHasSlownDown = redirectionManager.deltaPos.magnitude / redirectionManager.GetDeltaTime() < SLOW_DOWN_VELOCITY_THRESHOLD;
@@ -130,6 +130,8 @@ public class ZigZagRedirector : Redirector
             headingToTarget0 = !headingToTarget0;
             Debug.LogWarning("WAYPOINT UDPATED");
         }
+
+       
     }
 
     public override void ApplyRedirection()
