@@ -406,6 +406,7 @@ public class RedirectionManager : MonoBehaviour {
         //print("Is Resetter Null? " + (resetter == null));
         if (resetter != null && resetter.IsResetRequired())
         {
+            print("Turn");
             //print("RESET WAS REQUIRED");
             resetter.InitializeReset();
             inReset = true;

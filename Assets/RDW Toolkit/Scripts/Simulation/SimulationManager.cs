@@ -854,6 +854,7 @@ public class SimulationManager : MonoBehaviour {
         if (!experimentInProgress && experimentIterator < experimentSetups.Count)
         {
             startNextExperiment();
+            print("StartE");
             //experimentStartTime = Time.time;
         }
         //if (experimentInProgress && !userStartedWalking && ((Time.time - experimentStartTime) / timeScale > WALKING_WAIT_TIME))

@@ -44,6 +44,9 @@ public class KeyboardController : MonoBehaviour {
         Vector3 userForward = Utilities.FlattenedDir3D(this.transform.forward);
         Vector3 userRight = Utilities.FlattenedDir3D(this.transform.right);
 
+
+       // redirectionManager.resetter.SimulatedWalkerUpdate();
+
         if (Input.GetKey(KeyCode.W))
         {
             this.transform.Translate(translationSpeed * Time.deltaTime * userForward, Space.World);
