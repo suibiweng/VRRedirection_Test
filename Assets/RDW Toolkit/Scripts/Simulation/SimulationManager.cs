@@ -58,7 +58,7 @@ public class SimulationManager : MonoBehaviour {
 
     float zigLength = 5.5f;
     float zagAngle = 140;
-    int zigzagWaypointCount = 6;
+    public int zigzagWaypointCount = 6;
 
     float trialsForCurrentExperiment = 5;
 
@@ -415,6 +415,7 @@ public class SimulationManager : MonoBehaviour {
             poi0.parent = poiRoot;
             List<Transform> zigzagRedirectorWaypoints = new List<Transform>();
             zigzagRedirectorWaypoints.Add(poi0);
+            
             foreach (Vector2 waypoint in waypoints)
             {
                 Transform poi = (new GameObject()).transform;
@@ -536,10 +537,10 @@ public class SimulationManager : MonoBehaviour {
     
     public void Initialize()
     {
-        redirectionManager.runInTestMode = runInSimulationMode;
+        //redirectionManager.runInTestMode = runInSimulationMode;
         userIsWalking = !(redirectionManager.MOVEMENT_CONTROLLER == RedirectionManager.MovementController.AutoPilot);
         if (redirectionManager.MOVEMENT_CONTROLLER == RedirectionManager.MovementController.AutoPilot)
-            DISTANCE_TO_WAYPOINT_THRESHOLD = 0.05f;// 0.0001f;
+            DISTANCE_TO_WAYPOINT_THRESHOLD = 1f;// 0.0001f;
         
         if (redirectionManager.MOVEMENT_CONTROLLER != RedirectionManager.MovementController.Tracker)
         {
@@ -1075,6 +1076,7 @@ public class SimulationManager : MonoBehaviour {
         }
         else
         {
+             print("Resetting!");
             waypointIterator++;
             redirectionManager.targetWaypoint.position = new Vector3(waypoints[waypointIterator].x, redirectionManager.targetWaypoint.position.y, waypoints[waypointIterator].y);
         }

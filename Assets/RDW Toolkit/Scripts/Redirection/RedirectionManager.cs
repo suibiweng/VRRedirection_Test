@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using Redirection;
 public class RedirectionManager : MonoBehaviour {
@@ -133,7 +133,7 @@ public class RedirectionManager : MonoBehaviour {
 
         if (runInTestMode)
         {
-            MOVEMENT_CONTROLLER = MovementController.AutoPilot;
+            MOVEMENT_CONTROLLER = MovementController.Keyboard;
         }
         if (MOVEMENT_CONTROLLER != MovementController.Tracker)
         {
@@ -172,9 +172,11 @@ public class RedirectionManager : MonoBehaviour {
 
         if (inReset)
         {
+             
             if (resetter != null)
             {
                 resetter.ApplyResetting();
+              
             }
         }
         else
@@ -365,7 +367,7 @@ public class RedirectionManager : MonoBehaviour {
 
     void GetSimulatedHead()
     {
-        simulatedHead = transform.Find("Simulated User").Find("Head");
+        simulatedHead = transform.Find("CameraRig").Find("Head");
     }
 
     void GetTargetWaypoint()
