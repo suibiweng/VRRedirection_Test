@@ -47,7 +47,7 @@ public class RedirectionManager : MonoBehaviour {
     public Transform body;
     [HideInInspector]
     public Transform trackedSpace;
-    [HideInInspector]
+
     public Transform simulatedHead;
 
     [HideInInspector]
@@ -367,7 +367,7 @@ public class RedirectionManager : MonoBehaviour {
 
     void GetSimulatedHead()
     {
-        simulatedHead = transform.Find("CameraRig").Find("Head");
+   //     simulatedHead = transform.Find("CameraRig").Find("Head");
     }
 
     void GetTargetWaypoint()
