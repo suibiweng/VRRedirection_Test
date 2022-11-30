@@ -529,6 +529,7 @@ public class SimulationManager : MonoBehaviour {
         Destroy(waypoint.GetComponent<SphereCollider>());
         redirectionManager.targetWaypoint = waypoint;
         waypoint.name = "Simulated Waypoint";
+        waypoint.transform.tag="Waypoint";
         waypoint.position = 1.2f * Vector3.up + 1000 * Vector3.forward;
         waypoint.localScale = 0.3f * Vector3.one;
         waypoint.GetComponent<Renderer>().material.color = new Color(0, 1, 0);
@@ -1065,6 +1066,7 @@ public class SimulationManager : MonoBehaviour {
             redirectionManager.simulationManager.updateWaypoint();
         }
     }
+public Vector3 WayPointTarget;
 
     public void updateWaypoint()
     {
@@ -1080,6 +1082,8 @@ public class SimulationManager : MonoBehaviour {
              print("Resetting!");
             waypointIterator++;
             redirectionManager.targetWaypoint.position = new Vector3(waypoints[waypointIterator].x, redirectionManager.targetWaypoint.position.y, waypoints[waypointIterator].y);
+        
+            WayPointTarget=redirectionManager.targetWaypoint.position;
         }
     }
 }

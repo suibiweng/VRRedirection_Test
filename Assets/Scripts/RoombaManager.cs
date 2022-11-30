@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoobaManager : MonoBehaviour
+public class RoombaManager : MonoBehaviour
 {
 
+
     public udpScriptSimple RoomBaControl;
-    public RoomBA roomba;
-    public Can can;
+    public bool RobotForward=true;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,8 +18,7 @@ public class RoobaManager : MonoBehaviour
 
 
    public void GenerateRock(){
-        RoomBaControl.RandomMoveFowrad();
-
+       
     }
 
     // Update is called once per frame
@@ -25,8 +26,7 @@ public class RoobaManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space)){
 
-                GenerateRock();
-               
+                RoomBaControl.RandomMoveFowrad();
 
         }
 
@@ -39,6 +39,26 @@ public class RoobaManager : MonoBehaviour
         }
 
         
+    }
+
+
+
+    public void RoombaMove(){
+        if(RobotForward){
+
+ RoomBaControl.RandomMoveFowrad();
+ RobotForward=false;
+
+        }else{
+
+  RoomBaControl.MoveBack();
+
+   RobotForward=true;
+
+        }
+
+
+
     }
 
   

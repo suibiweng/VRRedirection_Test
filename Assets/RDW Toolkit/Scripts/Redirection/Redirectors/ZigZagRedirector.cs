@@ -121,20 +121,40 @@ public class ZigZagRedirector : Redirector
 
     public void updateWaypoint()
     {
-        bool userIsNearTarget = Utilities.FlattenedPos3D(redirectionManager.currPos - waypoints[waypointIndex].position).magnitude < WAYPOINT_UPDATE_DISTANCE;
+        bool userIsNearTarget = Utilities.FlattenedPos3D(redirectionManager.currPos - waypoints[waypointIndex].position).magnitude < 2f;
         bool userHasSlownDown = redirectionManager.deltaPos.magnitude / redirectionManager.GetDeltaTime() < SLOW_DOWN_VELOCITY_THRESHOLD;
         bool userHasMoreWaypointsLeft = waypointIndex < waypoints.Count - 1;
       //  if (userIsNearTarget && userHasSlownDown && userHasMoreWaypointsLeft && !redirectionManager.inReset)
 
+ GameObject dog =GameObject.Find("Dog");
+      
       if (userIsNearTarget && !redirectionManager.inReset)
         {
             waypointIndex++;
             headingToTarget0 = !headingToTarget0;
             Debug.LogWarning("WAYPOINT UDPATED");
+            dog.BroadcastMessage("TargetChange");
         }
 
        
     }
+
+    public void ZRedirection(){
+
+        //  GameObject dog =GameObject.Find("Dog");
+      if (!redirectionManager.inReset)
+        {
+            waypointIndex++;
+            headingToTarget0 = !headingToTarget0;
+            Debug.LogWarning("WAYPOINT UDPATED");
+        //    dog.BroadcastMessage("TargetChange");
+        }
+
+
+
+
+    }
+
 
     public override void ApplyRedirection()
     {

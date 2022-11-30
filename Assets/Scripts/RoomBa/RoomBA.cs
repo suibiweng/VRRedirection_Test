@@ -21,13 +21,13 @@ public class RoomBA : MonoBehaviour
 {
    public Rock rock;
    public MeshRenderer Baserenderer ;
-    Manager manager;
+    RoombaManager manager;
     public RoomBAStatus status;
     public MissonStatus misson; 
     // Start is called before the first frame update
     void Start()
     {
-        manager=FindObjectOfType<Manager>();
+        manager=FindObjectOfType<RoombaManager>();
     }
 
     // Update is called once per frame
