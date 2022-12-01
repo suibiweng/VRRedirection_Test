@@ -121,7 +121,7 @@ public class ZigZagRedirector : Redirector
 
     public void updateWaypoint()
     {
-        bool userIsNearTarget = Utilities.FlattenedPos3D(redirectionManager.currPos - waypoints[waypointIndex].position).magnitude < 2f;
+        bool userIsNearTarget = Utilities.FlattenedPos3D(redirectionManager.currPos - waypoints[waypointIndex].position).magnitude < 3f;
         bool userHasSlownDown = redirectionManager.deltaPos.magnitude / redirectionManager.GetDeltaTime() < SLOW_DOWN_VELOCITY_THRESHOLD;
         bool userHasMoreWaypointsLeft = waypointIndex < waypoints.Count - 1;
       //  if (userIsNearTarget && userHasSlownDown && userHasMoreWaypointsLeft && !redirectionManager.inReset)

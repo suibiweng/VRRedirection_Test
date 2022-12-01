@@ -8,6 +8,7 @@ public class DogBehaviour : MonoBehaviour
 {
     public ZigZagRedirector zrdirect;
     public RoombaManager manager;
+    public MoveRoomba moveRoomba;
 
     public bool isOnTracker;
 
@@ -43,7 +44,7 @@ public class DogBehaviour : MonoBehaviour
     void Update()
     {
 
-        waypoint=GameObject.FindWithTag("Waypoint");
+        waypoint=GameObject.Find("TrackerTarget");
         zrdirect=GameObject.FindObjectOfType<ZigZagRedirector>().GetComponent<ZigZagRedirector>();
         if(waypoint==null)return;
 
@@ -53,7 +54,7 @@ public class DogBehaviour : MonoBehaviour
         Targetposition=new Vector3(waypoint.transform.position.x,transform.position.y,waypoint.transform.position.z);
 
 
-        if(Input.GetKeyDown(KeyCode.P)){
+        if(Input.GetKeyDown(KeyCode.Space)){
 
                StartCoroutine(delayCallRoomba());
 
@@ -69,16 +70,9 @@ public class DogBehaviour : MonoBehaviour
 
             direction=0;
 
-/*
-            if(!sendCmd){
-                sendCmd=true;
-                StartCoroutine(delayCallRoomba());
-            }*/
-
 
         }else{
             direction=1;
-          //  sendCmd=false;
 
    
         }
@@ -88,14 +82,14 @@ public class DogBehaviour : MonoBehaviour
 
          if(direction>0){
 
-            if(!isOnTracker)
+         
             transform.LookAt(new Vector3(Targetposition.x,transform.position.y,Targetposition.z));    
-            else model.LookAt(new Vector3(Targetposition.x,transform.position.y,Targetposition.z));
+            
 
          }
             
         
-        if(!isOnTracker)
+     
         transform.Translate(Vector3.forward*speed*direction);
 
 
@@ -143,7 +137,7 @@ public class DogBehaviour : MonoBehaviour
 
     public void TargetChange(){
 
-StartCoroutine(delayCallRoomba());
+        StartCoroutine(delayCallRoomba());
 
 
     }
@@ -158,8 +152,8 @@ StartCoroutine(delayCallRoomba());
 
         yield return new WaitForSeconds(Random.Range(5,10));
 
-        manager.RoombaMove();
-    
+        //manager.RoombaMove();
+       moveRoomba.MoveBackandForward();
 
     }
 }

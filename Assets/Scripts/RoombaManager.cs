@@ -24,19 +24,20 @@ public class RoombaManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if(Input.GetKeyDown(KeyCode.Space)){
 
                 RoomBaControl.RandomMoveFowrad();
 
-        }
+        }*/
 
-
+/*
         if(Input.GetKeyDown(KeyCode.A)){
 
                 RoomBaControl.MoveBack();
         
 
-        }
+        }*/
 
         
     }
