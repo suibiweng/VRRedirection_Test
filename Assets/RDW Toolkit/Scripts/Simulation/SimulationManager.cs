@@ -431,7 +431,7 @@ public class SimulationManager : MonoBehaviour {
         //    virtualPath = redirectionManager.realTrailDrawer.drawPath(setup.initialConfiguration.initialPosition, waypoints, virtualPathColor, null);
 
         // Set First Waypoint Position and Enable It
-        redirectionManager.targetWaypoint.position = new Vector3(waypoints[0].x, redirectionManager.targetWaypoint.position.y, waypoints[0].y);
+        redirectionManager.targetWaypoint.position = new Vector3(waypoints[0].x, redirectionManager.targetWaypoint.position.y*3.2f, waypoints[0].y);
         waypointIterator = 0;
 
         // POSTPONING THESE FOR SAFETY REASONS!

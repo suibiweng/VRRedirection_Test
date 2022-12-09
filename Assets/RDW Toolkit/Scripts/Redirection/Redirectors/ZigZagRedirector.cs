@@ -72,6 +72,16 @@ public class ZigZagRedirector : Redirector
     {
         //Debug.LogWarning("UPDATE");
         updateWaypoint();
+
+
+
+        if(Input.GetKeyDown(KeyCode.Return)){
+
+             ZRedirection();
+
+
+
+        }
     }
 
 

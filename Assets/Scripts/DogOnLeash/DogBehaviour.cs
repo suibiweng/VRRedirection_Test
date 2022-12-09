@@ -56,7 +56,7 @@ public class DogBehaviour : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Space)){
 
-               StartCoroutine(delayCallRoomba());
+         //      StartCoroutine(delayCallRoomba());
 
 
 
@@ -137,7 +137,7 @@ public class DogBehaviour : MonoBehaviour
 
     public void TargetChange(){
 
-        StartCoroutine(delayCallRoomba());
+       // StartCoroutine(delayCallRoomba());
 
 
     }
@@ -153,7 +153,7 @@ public class DogBehaviour : MonoBehaviour
         yield return new WaitForSeconds(Random.Range(5,10));
 
         //manager.RoombaMove();
-       moveRoomba.MoveBackandForward();
+      // moveRoomba.MoveBackandForward();
 
     }
 }
