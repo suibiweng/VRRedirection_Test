@@ -32,7 +32,7 @@ public class TrackerRoomba : MonoBehaviour
     public PsudoControl control;
     public float distance=1.5f;
     public int pwmValue = 255;
-
+    public int pwmR=0,pwmL=0;
 
     UdpClient client;
     IPEndPoint remoteEndPoint;
@@ -55,19 +55,51 @@ public class TrackerRoomba : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+   
 
 
-        if(Input.GetKeyDown(KeyCode.F)){
+      /*  if(Input.GetKeyDown(KeyCode.F)){
             stopRoomBa();
          //   StartCoroutine( MoveForward(10));
+        }*/
+
+
+        pwmL=0;
+        pwmR=0;
+
+
+        if(Input.GetKey(KeyCode.D)){
+            pwmR=pwmValue;
+        }
+
+
+        if(Input.GetKey(KeyCode.C)){
+            pwmR=-pwmValue;
+        }
+
+        
+        if(Input.GetKey(KeyCode.A)){
+            pwmL=pwmValue;
+        }
+        
+
+        if(Input.GetKey(KeyCode.Z)){
+            pwmL=-pwmValue;
+        }
+
+
+      if(Input.GetKey(KeyCode.Space)){
+            pwmL=0;
+            pwmR=0;
         }
 
 
 
 
 
+     sendDatat(pwmL, pwmR);
 
-        RoomBaMove();
+
 
 
     }
