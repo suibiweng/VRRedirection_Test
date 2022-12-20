@@ -9,7 +9,7 @@ public class DogBehaviour : MonoBehaviour
     public ZigZagRedirector zrdirect;
     public RoombaManager manager;
     public MoveRoomba moveRoomba;
-
+public bool pat=false;
     public bool isOnTracker;
 
     public Transform RDWT;
@@ -17,6 +17,10 @@ public class DogBehaviour : MonoBehaviour
 
 
     public Transform Head;
+
+
+
+    public GameObject Rhand,Lhand;
 
 
     public Transform model;
@@ -33,7 +37,9 @@ public class DogBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+                 Rhand=GameObject.FindWithTag("rightHand");
+            Lhand=GameObject.FindWithTag("leftHand");
+   
         animator=model.GetComponent<Animator>();
         
     }
@@ -61,6 +67,13 @@ public class DogBehaviour : MonoBehaviour
 
 
         }
+
+
+
+
+            print("right hand"+ Vector3.Distance(transform.position,Rhand.transform.position));
+             print("left hand"+ Vector3.Distance(transform.position,Lhand.transform.position));
+        
     
 
 
@@ -71,10 +84,15 @@ public class DogBehaviour : MonoBehaviour
             direction=0;
 
 
+      pat = Vector3.Distance(transform.position,Rhand.transform.position)<=1f ||  Vector3.Distance(transform.position, Lhand.transform.position)<=1f; 
+   
+
+
+
         }else{
             direction=1;
 
-   
+pat=false;   
         }
 
 
