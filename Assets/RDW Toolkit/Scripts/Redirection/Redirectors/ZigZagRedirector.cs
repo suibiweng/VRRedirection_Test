@@ -136,15 +136,16 @@ public class ZigZagRedirector : Redirector
         bool userHasMoreWaypointsLeft = waypointIndex < waypoints.Count - 1;
       //  if (userIsNearTarget && userHasSlownDown && userHasMoreWaypointsLeft && !redirectionManager.inReset)
 
- GameObject dog =GameObject.Find("Dog");
+ //GameObject dog =GameObject.Find("Dog");
  
-  bool patting =  dog.GetComponent<DogBehaviour>().pat;
-      if (userIsNearTarget && !redirectionManager.inReset && patting)
+ // bool patting =  dog.GetComponent<DogBehaviour>().pat;
+     // if (userIsNearTarget && !redirectionManager.inReset && patting)
+     if (userIsNearTarget  && !redirectionManager.inReset)
         {
             waypointIndex++;
             headingToTarget0 = !headingToTarget0;
             Debug.LogWarning("WAYPOINT UDPATED");
-            dog.BroadcastMessage("TargetChange");
+   //         dog.BroadcastMessage("TargetChange");
         }
 
        

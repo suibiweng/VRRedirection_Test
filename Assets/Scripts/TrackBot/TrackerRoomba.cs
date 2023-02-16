@@ -52,20 +52,32 @@ public class TrackerRoomba : MonoBehaviour
 
     }
 
+      public bool EStop=false;
+
     // Update is called once per frame
     void Update()
     {
-   
+   if(!EStop){
+    
+    RoomBaMove();
+   }else{
+
+       stopRoomBa();
 
 
-      /*  if(Input.GetKeyDown(KeyCode.F)){
-            stopRoomBa();
+   }
+        
+
+        if(Input.GetKeyDown(KeyCode.F)){
+            EStop=!EStop;
+              stopRoomBa();
+            print("Stop");
          //   StartCoroutine( MoveForward(10));
-        }*/
+        }
 
 
-        pwmL=0;
-        pwmR=0;
+        //pwmL=0;
+        //pwmR=0;
 
 
         if(Input.GetKey(KeyCode.D)){
@@ -81,7 +93,7 @@ public class TrackerRoomba : MonoBehaviour
         if(Input.GetKey(KeyCode.A)){
             pwmL=pwmValue;
         }
-        
+
 
         if(Input.GetKey(KeyCode.Z)){
             pwmL=-pwmValue;
@@ -97,7 +109,7 @@ public class TrackerRoomba : MonoBehaviour
 
 
 
-     sendDatat(pwmL, pwmR);
+     //sendDatat(pwmL, pwmR);
 
 
 
@@ -146,11 +158,13 @@ public class TrackerRoomba : MonoBehaviour
         
         RotateFirst();
         
-      if(!turnning)  MoveSecond();
+    
 
 
 
       if(!isAlign && !isNear)turnning=true;
+
+        if(!turnning)  MoveSecond();
 
     }
 
@@ -161,11 +175,11 @@ public class TrackerRoomba : MonoBehaviour
         if (Target.position.x < transform.position.x) {
             if (!isAlign && !isNear){
 
-                 sendDatat(-pwmValue, pwmValue);
+                 sendDatat(-pwmValue/2, pwmValue/2);
                 status=RoombaStatus.Rotate;  
 
             }
-                     //control.wheel(150, -150);
+                   //  control.wheel(150, -150);
 
 
             if (isAlign) stopRoomBa();
@@ -209,7 +223,7 @@ public class TrackerRoomba : MonoBehaviour
 
      status= RoombaStatus.Forward;
 
-            // control.wheel(150, 150);
+           //  control.wheel(150, 150);
         }
 
 
