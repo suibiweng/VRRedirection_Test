@@ -71,8 +71,8 @@ public bool pat=false;
 
 
 
-            print("right hand"+ Vector3.Distance(transform.position,Rhand.transform.position));
-             print("left hand"+ Vector3.Distance(transform.position,Lhand.transform.position));
+           // print("right hand"+ Vector3.Distance(transform.position,Rhand.transform.position));
+           //  print("left hand"+ Vector3.Distance(transform.position,Lhand.transform.position));
         
     
 
@@ -84,7 +84,7 @@ public bool pat=false;
             direction=0;
 
 
-      pat = Vector3.Distance(transform.position,Rhand.transform.position)<=1f ||  Vector3.Distance(transform.position, Lhand.transform.position)<=1f; 
+      pat = Vector3.Distance(transform.position,Rhand.transform.position)<=1.2f ||  Vector3.Distance(transform.position, Lhand.transform.position)<=1.2f; 
    
 
 
