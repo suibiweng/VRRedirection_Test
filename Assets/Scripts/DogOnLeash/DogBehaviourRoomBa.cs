@@ -4,12 +4,12 @@ using UnityEngine;
 
 using Redirection;
 
-public class DogBehaviour : MonoBehaviour
+public class DogBehaviourRoomBa : MonoBehaviour
 {
     public ZigZagRedirector zrdirect;
     public RoombaManager manager;
     public MoveRoomba moveRoomba;
-public bool pat=false;
+    public bool pat=false;
     public bool isOnTracker;
 
     public Transform RDWT;
@@ -52,7 +52,10 @@ public bool pat=false;
 
         waypoint=GameObject.Find("TrackerTarget");
         zrdirect=GameObject.FindObjectOfType<ZigZagRedirector>().GetComponent<ZigZagRedirector>();
-        if(waypoint==null)return;
+
+
+
+        if (waypoint==null)return;
 
 
 
