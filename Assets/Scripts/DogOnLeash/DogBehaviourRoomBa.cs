@@ -7,6 +7,7 @@ using Redirection;
 public class DogBehaviourRoomBa : MonoBehaviour
 {
     public ZigZagRedirector zrdirect;
+   public  SimulationManager simulationManager;
     public RoombaManager manager;
     public MoveRoomba moveRoomba;
     public bool pat=false;
@@ -41,6 +42,8 @@ public class DogBehaviourRoomBa : MonoBehaviour
             Lhand=GameObject.FindWithTag("leftHand");
    
         animator=model.GetComponent<Animator>();
+
+        simulationManager=FindObjectOfType<SimulationManager>().GetComponent<SimulationManager>();
         
     }
 
@@ -65,8 +68,8 @@ public class DogBehaviourRoomBa : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Space)){
 
-         //      StartCoroutine(delayCallRoomba());
-
+         
+                simulationManager.updateWaypoint();
 
 
         }

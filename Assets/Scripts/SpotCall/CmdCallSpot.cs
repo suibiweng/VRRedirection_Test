@@ -3,9 +3,16 @@ using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+public enum CurrentTask{
+    AtoB=0,BtoA=1,Idle=2
+
+
+
+}
 
 public class CmdCallSpot : MonoBehaviour
 {
+  public   CurrentTask currentTask;
     public string folderpath;
     public string[]  batname;
 
@@ -30,7 +37,9 @@ public class CmdCallSpot : MonoBehaviour
 
     }
 
-        public void Task(int i){
+     public void runTask(int i){
+
+        currentTask=(CurrentTask)i;
 
         Process.Start(folderpath+"/"+batname[1]+".bat",Tasks[i]+".walk");
 

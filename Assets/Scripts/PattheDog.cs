@@ -2,9 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollisionExample : MonoBehaviour
+public class PattheDog : MonoBehaviour
 {
+
+    public DogBehaviourSpot dogspot;
     public CmdCallSpot spot;
+
+    public float DelaySeconds=3f;
+
+        bool TouchOne=false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -12,7 +19,9 @@ public class CollisionExample : MonoBehaviour
         
         spot.StartBat();
         print("in start");
-        spot.Task(0);
+
+        dogspot=FindObjectOfType<DogBehaviourSpot>().GetComponent<DogBehaviourSpot>();
+        //spot.Task(0);
     }
 
     // Update is called once per frame
@@ -21,7 +30,6 @@ public class CollisionExample : MonoBehaviour
         
     }
 
-    bool TouchOne=false;
 
     void OnCollisionEnter(Collision other) {
         print("Touch");
@@ -30,13 +38,19 @@ public class CollisionExample : MonoBehaviour
                 {
                     TouchOne=true;
                     print("hand dog collision");
-                    spot.Task(1);
+                    StartCoroutine(DelayTaskCall(DelaySeconds));
+
+                    if(dogspot!=null) dogspot.updateWayPoint();
+
+                 //   spot.Task(1);
                 }
 
-        }
-        
+        }  
         
     }
+
+
+
 
      void OnCollisionExit(Collision other) {
         print("Touch2");
@@ -44,6 +58,26 @@ public class CollisionExample : MonoBehaviour
         TouchOne=false;
         }
         
+    }
+
+    IEnumerator DelayTaskCall(float DelaySeconds ){
+        yield return new WaitForSeconds(DelaySeconds);
+
+        if(spot.currentTask==CurrentTask.AtoB){
+
+            spot.runTask((int)CurrentTask.BtoA);
+        }
+
+           if(spot.currentTask==CurrentTask.BtoA){
+
+            spot.runTask((int)CurrentTask.AtoB);
+        }
+
+        
+
+
+
+
     }
 
 

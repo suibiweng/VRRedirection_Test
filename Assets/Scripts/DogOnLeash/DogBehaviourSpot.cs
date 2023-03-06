@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DogBehaviourSpot : MonoBehaviour
 {
+     public  SimulationManager simulationManager;
     public ZigZagRedirector zrdirect;
     public RoombaManager manager;
     public MoveRoomba moveRoomba;
@@ -42,7 +43,7 @@ public class DogBehaviourSpot : MonoBehaviour
         Rhand = GameObject.FindWithTag("rightHand");
         Lhand = GameObject.FindWithTag("leftHand");
         spotDog = GameObject.FindObjectOfType<CmdCallSpot>().GetComponent<CmdCallSpot>();
-
+   simulationManager=FindObjectOfType<SimulationManager>().GetComponent<SimulationManager>();
 
     }
 
@@ -61,16 +62,17 @@ public class DogBehaviourSpot : MonoBehaviour
         if (waypoint == null) return;
 
         Targetposition = new Vector3(waypoint.transform.position.x, transform.position.y, waypoint.transform.position.z);
+        zrdirect=GameObject.FindObjectOfType<ZigZagRedirector>().GetComponent<ZigZagRedirector>();
 
-
-
+      
 
 
 
         
+  
 
-
-
+        
+/*
 
 
         if (Vector3.Distance(transform.position, Targetposition) < 1f) {
@@ -90,25 +92,32 @@ public class DogBehaviourSpot : MonoBehaviour
         }
 
 
-
-
         if (direction > 0) {
 
 
             transform.LookAt(new Vector3(Targetposition.x, transform.position.y, Targetposition.z));
 
 
-        }
+        }*/
 
 
 
-        transform.Translate(Vector3.forward * speed * direction);
+       // transform.Translate(Vector3.forward * speed * direction);
 
 
 
         AnimationControl((int)direction);
 
         
+
+
+    }
+
+    public void updateWayPoint(){
+
+
+        simulationManager.updateWaypoint();
+
 
 
     }

@@ -1,6 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+public enum SpotTasks{
+    AtoB=0,
+    BtoA=1,
+
+    Idle=2
+
+
+
+}
+
+
 
 public class RoobaManager : MonoBehaviour
 {
