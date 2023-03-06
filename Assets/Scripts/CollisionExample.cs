@@ -9,8 +9,10 @@ public class CollisionExample : MonoBehaviour
     void Start()
     {
         spot = GameObject.FindObjectOfType<CmdCallSpot>().GetComponent<CmdCallSpot>();
+        
         spot.StartBat();
-        spot.Task(1);
+        print("in start");
+        spot.Task(0);
     }
 
     // Update is called once per frame
@@ -23,21 +25,24 @@ public class CollisionExample : MonoBehaviour
 
     void OnCollisionEnter(Collision other) {
         print("Touch");
+        if(other.gameObject.tag =="rightHand" || other.gameObject.tag =="lefttHand" ){
+            if(!TouchOne)
+                {
+                    TouchOne=true;
+                    print("hand dog collision");
+                    spot.Task(1);
+                }
 
-        if(!TouchOne)
-    {
-        TouchOne=true;
-
-        spot.Task(1);
-    }
-       
+        }
         
         
     }
 
      void OnCollisionExit(Collision other) {
-
+        print("Touch2");
+        if(other.gameObject.tag =="rightHand" || other.gameObject.tag =="lefttHand" ){
         TouchOne=false;
+        }
         
     }
 
