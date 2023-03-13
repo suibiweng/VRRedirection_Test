@@ -30,6 +30,7 @@ public class TrackerRoomba : MonoBehaviour
     public Transform Target;
     public  bool isAlign,isNear;
    // public PsudoControl control;
+    public PsudoControl control;
     public float distance=1.5f;
     public int pwmValue = 255;
     public int pwmR=0,pwmL=0;

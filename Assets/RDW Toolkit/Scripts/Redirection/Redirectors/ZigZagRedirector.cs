@@ -72,20 +72,6 @@ public class ZigZagRedirector : Redirector
     {
         //Debug.LogWarning("UPDATE");
         updateWaypoint();
-
-        if(Input.GetKeyDown(KeyCode.Space)){
-
-             
-
-        }
-    }
-
-    public void NextPoint(){
-        waypointIndex++;
-             headingToTarget0 = !headingToTarget0;
-              Debug.LogWarning("WAYPOINT UDPATED");
-
-
     }
 
 
@@ -135,22 +121,12 @@ public class ZigZagRedirector : Redirector
 
     public void updateWaypoint()
     {
-        bool userIsNearTarget = Utilities.FlattenedPos3D(redirectionManager.currPos - waypoints[waypointIndex].position).magnitude < 5f;
-        
-        
-     //   bool userIsNearTarget =  Utilities.FlattenedPos3D(redirectionManager.currPos - realTarget0.position).magnitude < 5f;
+        bool userIsNearTarget = Utilities.FlattenedPos3D(redirectionManager.currPos - waypoints[waypointIndex].position).magnitude < WAYPOINT_UPDATE_DISTANCE;
         bool userHasSlownDown = redirectionManager.deltaPos.magnitude / redirectionManager.GetDeltaTime() < SLOW_DOWN_VELOCITY_THRESHOLD;
         bool userHasMoreWaypointsLeft = waypointIndex < waypoints.Count - 1;
-      // 
+      //  if (userIsNearTarget && userHasSlownDown && userHasMoreWaypointsLeft && !redirectionManager.inReset)
 
- //GameObject dog =GameObject.Find("Dog");
- 
- // bool patting =  dog.GetComponent<DogBehaviour>().pat;
-     // if (userIsNearTarget && !redirectionManager.inReset && patting)
-   //  if (userIsNearTarget  && !redirectionManager.inReset)
-      if (userIsNearTarget && userHasSlownDown && userHasMoreWaypointsLeft && !redirectionManager.inReset)
-        
-        // if (userIsNearTarget  && !redirectionManager.inReset)
+      if (userIsNearTarget && !redirectionManager.inReset)
         {
             waypointIndex++;
              headingToTarget0 = !headingToTarget0;
