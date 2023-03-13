@@ -72,6 +72,20 @@ public class ZigZagRedirector : Redirector
     {
         //Debug.LogWarning("UPDATE");
         updateWaypoint();
+
+        if(Input.GetKeyDown(KeyCode.Space)){
+
+             
+
+        }
+    }
+
+    public void NextPoint(){
+        waypointIndex++;
+             headingToTarget0 = !headingToTarget0;
+              Debug.LogWarning("WAYPOINT UDPATED");
+
+
     }
 
 
@@ -121,20 +135,48 @@ public class ZigZagRedirector : Redirector
 
     public void updateWaypoint()
     {
-        bool userIsNearTarget = Utilities.FlattenedPos3D(redirectionManager.currPos - waypoints[waypointIndex].position).magnitude < WAYPOINT_UPDATE_DISTANCE;
+        bool userIsNearTarget = Utilities.FlattenedPos3D(redirectionManager.currPos - waypoints[waypointIndex].position).magnitude < 5f;
+        
+        
+     //   bool userIsNearTarget =  Utilities.FlattenedPos3D(redirectionManager.currPos - realTarget0.position).magnitude < 5f;
         bool userHasSlownDown = redirectionManager.deltaPos.magnitude / redirectionManager.GetDeltaTime() < SLOW_DOWN_VELOCITY_THRESHOLD;
         bool userHasMoreWaypointsLeft = waypointIndex < waypoints.Count - 1;
-      //  if (userIsNearTarget && userHasSlownDown && userHasMoreWaypointsLeft && !redirectionManager.inReset)
+      // 
 
-      if (userIsNearTarget && !redirectionManager.inReset)
+ //GameObject dog =GameObject.Find("Dog");
+ 
+ // bool patting =  dog.GetComponent<DogBehaviour>().pat;
+     // if (userIsNearTarget && !redirectionManager.inReset && patting)
+   //  if (userIsNearTarget  && !redirectionManager.inReset)
+      if (userIsNearTarget && userHasSlownDown && userHasMoreWaypointsLeft && !redirectionManager.inReset)
+        
+        // if (userIsNearTarget  && !redirectionManager.inReset)
         {
             waypointIndex++;
-            headingToTarget0 = !headingToTarget0;
+             headingToTarget0 = !headingToTarget0;
             Debug.LogWarning("WAYPOINT UDPATED");
+   //         dog.BroadcastMessage("TargetChange");
         }
 
        
     }
+
+    public void ZRedirection(){
+
+        //  GameObject dog =GameObject.Find("Dog");
+      if (!redirectionManager.inReset)
+        {
+            waypointIndex++;
+            headingToTarget0 = !headingToTarget0;
+            Debug.LogWarning("WAYPOINT UDPATED");
+        //    dog.BroadcastMessage("TargetChange");
+        }
+
+
+
+
+    }
+
 
     public override void ApplyRedirection()
     {
@@ -260,7 +302,7 @@ public class ZigZagRedirector : Redirector
         waypoint.localScale = 0.3f * Vector3.one;
         waypoint.GetComponent<Renderer>().material.color = new Color(1, 1, 1);
         waypoint.GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0, 0.12f, 0));
-        waypoint.GetComponent<Renderer>().enabled = false;
+        waypoint.GetComponent<Renderer>().enabled = true;
         return waypoint;
     }
 

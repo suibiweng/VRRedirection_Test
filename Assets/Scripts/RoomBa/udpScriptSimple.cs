@@ -38,7 +38,7 @@ public class udpScriptSimple : MonoBehaviour
 
     
     string cmd="";
-    steps =3;
+    steps =5;
 cmd=steps+"F";
 
 roomBA.misson=MissonStatus.isTarget;
