@@ -275,6 +275,7 @@ public class ZigZagRedirector : Redirector
         waypoint.parent = this.transform;
         waypoint.name = "Real Target "+targetID;
         waypoint.position = position;
+        waypoint.gameObject.tag="RealTarget";
         waypoint.localScale = 0.3f * Vector3.one;
         waypoint.GetComponent<Renderer>().material.color = new Color(1, 1, 1);
         waypoint.GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0, 0.12f, 0));
