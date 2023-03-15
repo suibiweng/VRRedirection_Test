@@ -8,3 +8,5 @@ EditorBuildSettings:
   m_configObjects:
     Unity.XR.OpenVR.Settings: {fileID: 11400000, guid: 85acb64dee7c30640909262ba6a7c81e, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 7da481ce46b7b85418b2597369417719, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 63c5b2a57027d7247b7dc0b6b4ecd992, type: 2}
+    xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: 85d6bc8218424aa43be6029346bbff6c, type: 2}

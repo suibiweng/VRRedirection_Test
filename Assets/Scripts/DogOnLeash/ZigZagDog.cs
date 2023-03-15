@@ -27,6 +27,8 @@ public class ZigZagDog : MonoBehaviour
     public bool spotTracking;
     public Transform Target;
 
+    public SendOsctoSpot spotOsc;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +36,8 @@ public class ZigZagDog : MonoBehaviour
         StartCoroutine(getRealTargets());
 
 
-        
+
+        spotOsc =FindObjectOfType<SendOsctoSpot>();
 
     }
 
@@ -146,10 +149,18 @@ public class ZigZagDog : MonoBehaviour
 
     }
 
+    int OscIndex;
+
     void switchTarget(){
 
-                       if(NeartoWhichTargets()==1)setMoveTarget(0);
-       if(NeartoWhichTargets()==0)setMoveTarget(1);
+       if(NeartoWhichTargets()==1){setMoveTarget(0);
+       OscIndex=2;
+       }
+
+
+       if(NeartoWhichTargets()==0){setMoveTarget(1);
+       OscIndex=1;
+       }
 
 
 
@@ -165,10 +176,14 @@ public class ZigZagDog : MonoBehaviour
         Target.position)<nearRange)){
 
                   status=Dogstatus.Sit;
+
+                  spotOsc.oscSend(0);
+                  
+                  
                    NeartoWhichTargets();
                    switchTarget();
         }
-        transform.Translate(new Vector3(0,0,speed));
+      if(!spotTracking)  transform.Translate(new Vector3(0,0,speed));
 
         
 
@@ -239,6 +254,8 @@ public class ZigZagDog : MonoBehaviour
     IEnumerator ReciveTouch(){
         yield return new WaitForSeconds(1.5f);
         status=Dogstatus.Moving;
+
+        spotOsc.oscSend(OscIndex);
 
 
     }    
