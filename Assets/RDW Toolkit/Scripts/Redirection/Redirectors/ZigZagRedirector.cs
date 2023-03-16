@@ -19,7 +19,7 @@ public class ZigZagRedirector : Redirector
     /// <summary>
     ///  How close you need to get to the waypoint for it to be considered reached.
     /// </summary>
-    float WAYPOINT_UPDATE_DISTANCE = 0.5f;
+    float WAYPOINT_UPDATE_DISTANCE = 2f;
     /// <summary>
     /// How slow you need to be walking to trigger next waypoint when in proximity to current target.
     /// </summary>
@@ -102,7 +102,7 @@ public class ZigZagRedirector : Redirector
 
         if (redirectionManager.MOVEMENT_CONTROLLER == RedirectionManager.MovementController.AutoPilot)
         {
-            WAYPOINT_UPDATE_DISTANCE = 0.1f;
+            WAYPOINT_UPDATE_DISTANCE = 2f;
             SLOW_DOWN_VELOCITY_THRESHOLD = 100f;
         }
 

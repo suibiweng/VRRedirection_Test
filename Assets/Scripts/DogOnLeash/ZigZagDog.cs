@@ -27,17 +27,19 @@ public class ZigZagDog : MonoBehaviour
     public bool spotTracking;
     public Transform Target;
 
-    public SendOsctoSpot spotOsc;
+    public CmdCallSpot SpotCall;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
         animator=GetComponent<Animator>();
         StartCoroutine(getRealTargets());
+    if(spotTracking)    SpotCall.StartBat();
 
 
 
-        spotOsc =FindObjectOfType<SendOsctoSpot>();
 
     }
 
@@ -60,8 +62,19 @@ public class ZigZagDog : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space)){
 
             status=Dogstatus.Moving;
+            CallNextTask();
+            switchTarget();
 
         }
+
+     if(Input.GetKeyDown(KeyCode.T)){
+
+        
+        StartCoroutine(AutoRunforTimes(10,75));
+
+        }
+
+        
 
 
 
@@ -141,6 +154,28 @@ public class ZigZagDog : MonoBehaviour
     
     }
 
+
+    IEnumerator AutoRunforTimes(int times,int waitSeconds)
+
+    {
+
+        for(int i=0;  i<times/2; i++){
+            status=Dogstatus.Moving;
+            CallNextTask();
+            yield return new WaitForSeconds(waitSeconds);
+
+
+
+
+
+        }
+
+
+
+
+
+    }
+
     void faceToTarget(){
           transform.LookAt( new Vector3(Target.position.x,transform.position.y,Target.position.z) );
 
@@ -177,7 +212,7 @@ public class ZigZagDog : MonoBehaviour
 
                   status=Dogstatus.Sit;
 
-                  spotOsc.oscSend(0);
+                  
                   
                   
                    NeartoWhichTargets();
@@ -240,7 +275,7 @@ public class ZigZagDog : MonoBehaviour
             Touchonce=true;
             
              
-            StartCoroutine( ReciveTouch());
+          
 
             
 
@@ -251,11 +286,21 @@ public class ZigZagDog : MonoBehaviour
     }
 
 
+    void CallNextTask(){
+
+
+          StartCoroutine( ReciveTouch());
+
+
+
+    }
+
+
     IEnumerator ReciveTouch(){
         yield return new WaitForSeconds(1.5f);
         status=Dogstatus.Moving;
 
-        spotOsc.oscSend(OscIndex);
+       if(spotTracking) SpotCall.runTask(OscIndex);
 
 
     }    
