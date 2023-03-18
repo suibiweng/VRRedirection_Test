@@ -17,6 +17,10 @@ public class ZigZagDog : MonoBehaviour
 {
     Animator animator;
 
+    public int MaskTasks=10;
+    
+    public Transform ModelTransform;
+
 
     public DogMissionStatus mission;
 
@@ -28,7 +32,7 @@ public class ZigZagDog : MonoBehaviour
     public Transform Target;
 
     public CmdCallSpot SpotCall;
-
+    public Vector3 modelPosition;
 
 
     // Start is called before the first frame update
@@ -36,7 +40,12 @@ public class ZigZagDog : MonoBehaviour
     {
         animator=GetComponent<Animator>();
         StartCoroutine(getRealTargets());
-    if(spotTracking)    SpotCall.StartBat();
+    if(spotTracking)    {
+        SpotCall.StartBat();
+        modelPosition=ModelTransform.position;
+
+
+    }
 
 
 
@@ -84,6 +93,14 @@ public class ZigZagDog : MonoBehaviour
             case Dogstatus.Sit:
                 animator.SetBool("isWalking",false);
                 animator.SetBool("isSitting",true);
+
+                if(spotTracking){
+                    
+ModelTransform.position= new Vector3(modelPosition.x,0.19f,modelPosition.z);
+
+                }
+
+
             
             break;
 
@@ -93,59 +110,27 @@ public class ZigZagDog : MonoBehaviour
                 animator.SetBool("isSitting",false);
                 faceToTarget();
                 MoveToTarget();
+
+
+                if(spotTracking){
+                    
+              ModelTransform.position= modelPosition;
+
+                }
+
             
             break;
 
 
         }
 
-      
 
 
+        if(currentTask>MaskTasks){
 
 
-
-
-
-
-/*
-
-        switch (mission){
-
-            case DogMissionStatus.Sit:
-            animator.SetBool("isWalking",false);
-            animator.SetBool("isSitting",true);
-
-            break;
-
-            case DogMissionStatus.AtoB:
-                animator.SetBool("isWalking",true);
-                  animator.SetBool("isSitting",false);
-                faceToTarget();
-                MoveToTarget();
-              //  NeartoWhichTargets();
-
-
-
-            break;
-
-
-
-            case DogMissionStatus.BtoA:
-            animator.SetBool("isWalking",true);
-             animator.SetBool("isSitting",false);
-                faceToTarget();
-                MoveToTarget();
-               // NeartoWhichTargets();
-
-            
-            
-            break;
-
-
+            Application.LoadLevel(2);
         }
-        
-*/
 
 
 
@@ -293,10 +278,17 @@ public class ZigZagDog : MonoBehaviour
 
 
 
+
+
+
+
     }
 
-
+    public int currentTask=0;
     IEnumerator ReciveTouch(){
+
+
+        currentTask++;
         yield return new WaitForSeconds(1.5f);
         status=Dogstatus.Moving;
 

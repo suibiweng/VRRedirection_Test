@@ -534,6 +534,7 @@ public class SimulationManager : MonoBehaviour {
         waypoint.localScale = 0.3f * Vector3.one;
         waypoint.GetComponent<Renderer>().material.color = new Color(0, 1, 0);
         waypoint.GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0, 0.12f, 0));
+        waypoint.GetComponent<Renderer>().enabled=false;
     }
     
     public void Initialize()

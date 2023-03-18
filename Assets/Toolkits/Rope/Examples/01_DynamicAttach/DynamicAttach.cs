@@ -45,7 +45,7 @@ namespace RopeToolkit.Example
             rope.spawnPoints.Add(ropeObject.transform.InverseTransformPoint(end));
 
             rope.radius = 0.01f;
-            rope.simulation.stiffness = 0.01f;
+            rope.simulation.stiffness = 0.8f;
 
 
             var conn0 = ropeObject.AddComponent<RopeConnection>();
