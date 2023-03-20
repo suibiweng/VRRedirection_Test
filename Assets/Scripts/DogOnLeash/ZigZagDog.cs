@@ -15,6 +15,7 @@ public enum Dogstatus{
 
 public class ZigZagDog : MonoBehaviour
 {
+    public AudioSource audioSource;
     Animator animator;
 
     public int MaskTasks=10;
@@ -73,6 +74,7 @@ public class ZigZagDog : MonoBehaviour
             status=Dogstatus.Moving;
             CallNextTask();
             switchTarget();
+            audioSource.Play();
 
         }
 
