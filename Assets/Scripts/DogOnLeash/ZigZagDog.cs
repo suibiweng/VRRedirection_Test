@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+using UnityEngine.UI;
 public enum DogMissionStatus{
     Sit,AtoB,BtoA
 
@@ -22,14 +24,14 @@ public class ZigZagDog : MonoBehaviour
     
     public Transform ModelTransform;
 
-
+    public Text TasksCount,TasksFinished;
     public DogMissionStatus mission;
 
     public Dogstatus status;
 
     public float speed=0.01f;
     public GameObject [] RealTargets;
-    public bool spotTracking;
+    public bool spotTracking,debug;
     public Transform Target;
 
     public CmdCallSpot SpotCall;
@@ -43,7 +45,7 @@ public class ZigZagDog : MonoBehaviour
         StartCoroutine(getRealTargets());
     if(spotTracking)    {
         SpotCall.StartBat();
-        modelPosition=ModelTransform.position;
+        modelPosition=ModelTransform.localPosition;
 
 
     }
@@ -55,20 +57,53 @@ public class ZigZagDog : MonoBehaviour
 
     IEnumerator getRealTargets(){
         yield return new WaitForSeconds(1f);
-
         RealTargets=GameObject.FindGameObjectsWithTag("RealTarget");
         switchTarget();
 
 
 
-     
-
-
     }
+public void Move(){
+
+    status=Dogstatus.Moving;
+
+}
+public void sit(){
+
+ status=Dogstatus.Sit;
+
+}
+
+public void Barking(){
+    
+  audioSource.Play();
+
+}
+
+public void spotAtoB(){
+    StartCoroutine(DelaytoRun());
+     switchTarget();
+     audioSource.Play();
+     currentTask++;
+
+}
+
+public void spotBtoA(){
+     StartCoroutine(DelaytoRun());
+     switchTarget();
+     audioSource.Play();
+     currentTask++;
+
+
+    
+}
+
 
     // Update is called once per frame
     void Update()
     {
+
+
         if(Input.GetKeyDown(KeyCode.Space)){
 
             status=Dogstatus.Moving;
@@ -96,9 +131,9 @@ public class ZigZagDog : MonoBehaviour
                 animator.SetBool("isWalking",false);
                 animator.SetBool("isSitting",true);
 
-                if(spotTracking){
+               if(spotTracking){
                     
-ModelTransform.position= new Vector3(modelPosition.x,0.19f,modelPosition.z);
+                  //  ModelTransform.localPosition= new Vector3(modelPosition.x,modelPosition.y,0f);
 
                 }
 
@@ -116,7 +151,7 @@ ModelTransform.position= new Vector3(modelPosition.x,0.19f,modelPosition.z);
 
                 if(spotTracking){
                     
-              ModelTransform.position= modelPosition;
+            //  ModelTransform.localPosition= modelPosition;
 
                 }
 
@@ -128,10 +163,14 @@ ModelTransform.position= new Vector3(modelPosition.x,0.19f,modelPosition.z);
 
 
 
-        if(currentTask>MaskTasks){
+        if(currentTask>=MaskTasks){
 
+            TasksFinished.text="Done!!";
+           // Application.LoadLevel(2);
+        }
+        else{
 
-            Application.LoadLevel(2);
+            TasksCount.text=""+currentTask;
         }
 
 
@@ -197,7 +236,20 @@ ModelTransform.position= new Vector3(modelPosition.x,0.19f,modelPosition.z);
         if((Vector3.Distance(transform.position,
         Target.position)<nearRange)){
 
-                  status=Dogstatus.Sit;
+
+
+
+            if(!spotTracking)
+            {
+
+                status=Dogstatus.Sit;
+
+
+            }else{
+
+                StartCoroutine(DelaytoSit());
+            }
+                  
 
                   
                   
@@ -212,6 +264,21 @@ ModelTransform.position= new Vector3(modelPosition.x,0.19f,modelPosition.z);
 
 
     }
+
+    IEnumerator DelaytoRun(){
+        yield return new WaitForSeconds(15f);
+        if(!debug)
+status=Dogstatus.Moving;
+
+    }
+
+       IEnumerator DelaytoSit(){
+        yield return new WaitForSeconds(8f);
+           if(!debug)
+status=Dogstatus.Sit;
+
+    }
+
 
 
     void setMoveTarget(int targetIndex){
